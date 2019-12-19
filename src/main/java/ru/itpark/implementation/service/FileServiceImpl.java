@@ -25,6 +25,11 @@ public class FileServiceImpl {
 
     public TaskResult searchFilesByPhrase(String phrase) throws IOException {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<File> fileList = Files.walk(Paths.get(uploadPath))
                 .filter(Files::isRegularFile).map(Path::toFile).collect(Collectors.toList());
         FileRepositoryImpl fileRepository = new FileRepositoryImpl();

@@ -18,12 +18,13 @@ public class TaskService {
 
     }
 
-    public void createTask(String phrase, String sessionId) {
+    public Task createTask(String phrase, String sessionId) {
         Task task = new Task();
         task.setPhrase(phrase);
         task.setSessionId(sessionId);
         task.setStatus(TaskStatus.WAITING);
         taskRepository.createTask(task);
+        return task;
     }
 
     public List<Task> getListTaskWithStatusOneAndSetStatusTwo(TaskStatus status, TaskStatus newStatus) {
@@ -41,5 +42,9 @@ public class TaskService {
     public void updateTask(Task task) {
         taskRepository.updateTask(task);
 
+    }
+
+    public List<Task> checkoutDataBase() {
+        return taskRepository.checkoutDataBase();
     }
 }

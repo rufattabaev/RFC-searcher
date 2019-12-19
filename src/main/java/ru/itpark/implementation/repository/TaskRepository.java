@@ -1,6 +1,8 @@
 package ru.itpark.implementation.repository;
+
 import ru.itpark.enums.TaskStatus;
 import ru.itpark.model.Task;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -99,4 +101,27 @@ public class TaskRepository {
             e.printStackTrace();
         }
     }
+
+    public List<Task> checkoutDataBase() {
+        try (Connection connection = ds.getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT *  FROM tasks ORDER BY id DESC LIMIT 5");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Task> tasks = new ArrayList<>();
+            while (resultSet.next()) {
+                Task task = new Task();
+                task.setStatus(TaskStatus.valueOf(resultSet.getString("status")));
+                task.setPhrase(resultSet.getString("phrase"));
+                task.setId(resultSet.getInt("id"));
+                tasks.add(task);
+            }
+            return tasks;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }
+

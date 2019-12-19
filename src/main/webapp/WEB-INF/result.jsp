@@ -1,3 +1,5 @@
+<%@ page import="ru.itpark.model.Task" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -11,10 +13,49 @@
 </head>
 <body>
 <div class="container">
-    <a href="/">PFC Searcher</a>
-    Task status
+   <h1 align="center"><a href="/">RFC Searcher</a></h1>
+
+    <%--<div class="card">--%>
+        <%--<div class="card-body">--%>
+            <%--<h5 class="card-title">--%>
+                <%--<% if (request.getAttribute("tasks") != null) {%>--%>
+                <%--<%List<Task> taskList = (List<Task>) request.getAttribute("tasks");%>--%>
+                <%--<% for (Task tasks : taskList) { %>--%>
+                <%--<%=tasks.getId() %>--%>
+                <%--<%=tasks.getPhrase() %>--%>
+                <%--<%=tasks.getStatus() %>--%>
+            <%--</h5>--%>
+            <%--<% } %>--%>
+            <%--<% } else response.getWriter().write("No tasks");%>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">Searching phrase</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if (request.getAttribute("tasks") != null) {%>
+        <%List<Task> taskList = (List<Task>) request.getAttribute("tasks");%>
+        <% for (Task tasks : taskList) { %>
+        <tr>
+            <th scope="row">1</th>
+            <td> <%=tasks.getId() %></td>
+            <td><%=tasks.getPhrase() %></td>
+            <td><%=tasks.getStatus() %></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <% } else response.getWriter().write("No tasks");%>
 
 </div>
-
+<%@include file="bootstrap-scripts.jsp" %>
 </body>
 </html>
