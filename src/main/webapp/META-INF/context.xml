@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <Resource
+            name="db.sqlite"
+            auth="container"
+            type="javax.sql.DataSource"
+            driverClassName="org.sqlite.JDBC"
+            url="jdbc:sqlite:D:/projects/tasksexample-developer\db.sqlite"
+            closeMethod="close"
+    />
+
+    <Resource
+            name="bean/file-service"
+            type="ru.itpark.implementation.service.FileServiceImpl"
+            factory="org.apache.naming.factory.BeanFactory"
+    />
+
+    <Resource name="postgres" auth="Container" type="javax.sql.DataSource"
+              username="postgres"
+              password="emilrufatovich"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/tasks_db"
+              maxTotal="60"
+              maxIdle="20"
+              validationQuery="select 1" />
+
+</Context>
