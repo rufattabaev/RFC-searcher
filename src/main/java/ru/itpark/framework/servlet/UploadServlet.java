@@ -1,13 +1,12 @@
 package ru.itpark.framework.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.var;
 import ru.itpark.implementation.repository.FileRepositoryImpl;
 import ru.itpark.implementation.repository.TaskRepository;
 import ru.itpark.implementation.service.FileServiceImpl;
 import ru.itpark.implementation.service.TaskService;
+import ru.itpark.model.SearchByFileResult;
 import ru.itpark.model.TaskResult;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -25,8 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @MultipartConfig
 public class UploadServlet extends HttpServlet {
@@ -37,9 +34,9 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            var context = new InitialContext();
+            InitialContext context = new InitialContext();
             fileService = (FileServiceImpl) context.lookup("java:/comp/env/bean/file-service");
-            fileRepository=new FileRepositoryImpl();
+            fileRepository = new FileRepositoryImpl();
         } catch (NamingException e) {
             e.printStackTrace();
             throw new ServletException();
@@ -50,12 +47,11 @@ public class UploadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-
         Path path = Paths.get("D:\\projects\\tasksexample-developer\\files\\" + req.getSession().getId());
         if (Files.exists(path)) {
             ObjectMapper objectMapper = new ObjectMapper();
             List<TaskResult> taskResultList = new ArrayList<>();
-            Files.walk(path).filter(Files::isRegularFile).forEach(file ->{
+            Files.walk(path).filter(Files::isRegularFile).forEach(file -> {
                 try {
                     TaskResult taskResult = objectMapper.readValue(new FileInputStream(file.toString()), TaskResult.class);
                     taskResult.setTempFileName(file.getFileName().toString());
@@ -71,7 +67,7 @@ public class UploadServlet extends HttpServlet {
         if (fileName != null) {
 
             resp.setContentType("text/plain");
-            resp.setHeader("Content-disposition", "attachment; filename="+fileName+".json");
+            resp.setHeader("Content-disposition", "attachment; filename=" + fileName + ".txt");
 
             try (InputStream in = new FileInputStream(path.toString() + "\\" + fileName);
                  OutputStream out = resp.getOutputStream()) {
@@ -93,14 +89,14 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        if (req.getParameter("button").equals("clear")) {
-//            FileRepositoryImpl.concurrentHashMap = new ConcurrentHashMap<>();
-//            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
-//            return;
-//        } else {
+        if (req.getParameter("button").equals("clear")) {
+            SearchByFileResult result = new SearchByFileResult();
+            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+            return;
+        } else {
             Part part = req.getPart("file");
             fileService.writeFile(part);
-//        }
+        }
 
     }
 }

@@ -1,16 +1,10 @@
 package ru.itpark.implementation.repository;
-
-import lombok.var;
 import ru.itpark.enums.TaskStatus;
 import ru.itpark.model.Task;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +20,8 @@ public class TaskRepository {
             e.printStackTrace();
         }
 
-        try (var conn = ds.getConnection()) {
-            try (var stmt = conn.createStatement()) {
+        try (Connection conn = ds.getConnection()) {
+            try (Statement stmt = conn.createStatement()) {
                 stmt.execute("CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, phrase TEXT NOT NULL, status TEXT NOT NULL, sessionId TEXT NOT NULL)");
             }
         } catch (SQLException e) {
@@ -68,7 +62,6 @@ public class TaskRepository {
         }
         return null;
     }
-
 
 
     public List<Task> getTasksByStatus(TaskStatus status) {
