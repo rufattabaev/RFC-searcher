@@ -91,7 +91,6 @@ public class UploadDownloadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //TODO: реорганизовать код, вынести всё в интерфейсы
         Part part = req.getPart("file");
         if (!(part == null)) {
             fileService.writeFile(part);
