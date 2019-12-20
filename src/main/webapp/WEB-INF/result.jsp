@@ -18,7 +18,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">id</th>
             <th scope="col">Searching phrase</th>
             <th scope="col">Status</th>
@@ -29,7 +28,6 @@
         <%List<Task> taskList = (List<Task>) request.getAttribute("tasks");%>
         <% for (Task tasks : taskList) { %>
         <tr>
-            <th scope="row">1</th>
             <td><%=tasks.getId() %>
             </td>
             <td><%=tasks.getPhrase() %>

@@ -46,6 +46,9 @@
                         <% if (request.getAttribute("itemsMap") != null) {%>
                         <%List<TaskResult> taskResultList = (List<TaskResult>) request.getAttribute("itemsMap");%>
                         <% for (TaskResult taskResult : taskResultList) { %>
+                        <div>
+                            <h5 class="card-title">Search phrase is "<%=taskResult.getQuery()%>" </h5>
+                        </div>
                         <% for (SearchByFileResult fileResult : taskResult.getResult()) { %>
                     </h5>
                     <p class="card-text">
@@ -59,6 +62,7 @@
                         <a href="/?filename=<%=taskResult.getTempFileName()%>"><h3 class="btn btn-primary">
                             Download </h3></a>
                     </div>
+                    </p>
                     <% } %>
                 </div>
             </div>

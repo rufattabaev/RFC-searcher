@@ -42,26 +42,6 @@ public class SearchServlet extends HttpServlet {
 
         }
 
-
-        String fileUrl = req.getParameter("fileName");
-        if (fileUrl != null) {
-
-            resp.setContentType("text/plain");
-            resp.setHeader("Content-disposition", "attachment; filename=sample.txt");
-
-            try (InputStream in = new FileInputStream(fileUrl);
-                 OutputStream out = resp.getOutputStream()) {
-                int ARBITARY_SIZE = 1048;
-                byte[] buffer = new byte[ARBITARY_SIZE];
-
-                int numBytesRead;
-                while ((numBytesRead = in.read(buffer)) > 0) {
-                    out.write(buffer, 0, numBytesRead);
-                }
-            }
-
-        }
-
         resp.sendRedirect("/");
 
     }
