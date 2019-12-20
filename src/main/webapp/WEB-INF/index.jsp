@@ -63,7 +63,6 @@
                         <a href="/?filename=<%=taskResult.getTempFileName()%>"><h3 class="btn btn-primary">
                             Download <%-- <%=taskResult.getQuery()%>--%> </h3></a>
                     </div>
-
                     <% } %>
                 </div>
             </div>

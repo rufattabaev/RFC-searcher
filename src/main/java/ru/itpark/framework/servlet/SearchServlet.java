@@ -4,6 +4,7 @@ import ru.itpark.implementation.repository.FileRepositoryImpl;
 import ru.itpark.implementation.repository.TaskRepository;
 import ru.itpark.implementation.service.FileServiceImpl;
 import ru.itpark.implementation.service.TaskService;
+import ru.itpark.model.SearchByFileResult;
 import ru.itpark.model.Task;
 
 import javax.servlet.ServletException;
@@ -67,4 +68,5 @@ public class SearchServlet extends HttpServlet {
         resp.sendRedirect("/");
 
     }
+
 }

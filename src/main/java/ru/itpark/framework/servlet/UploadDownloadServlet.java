@@ -7,6 +7,7 @@ import ru.itpark.implementation.service.FileServiceImpl;
 import ru.itpark.implementation.service.TaskService;
 import ru.itpark.model.SearchByFileResult;
 import ru.itpark.model.TaskResult;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @MultipartConfig
-public class UploadServlet extends HttpServlet {
+public class UploadDownloadServlet extends HttpServlet {
     private FileServiceImpl fileService;
     private FileRepositoryImpl fileRepository;
     TaskService taskService = new TaskService(new TaskRepository());
@@ -89,14 +90,17 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("button").equals("clear")) {
-            SearchByFileResult result = new SearchByFileResult();
-            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
-            return;
-        } else {
-            Part part = req.getPart("file");
+
+        //TODO: реорганизовать код, вынести всё в интерфейсы
+        Part part = req.getPart("file");
+        if (!(part == null)) {
             fileService.writeFile(part);
         }
 
+        if (req.getParameter("button").equals("clear")) {
+            SearchByFileResult result = new SearchByFileResult();
+            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        }
+        resp.sendRedirect("/");
     }
 }
