@@ -8,28 +8,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Auto Catalog</title>
+    <title>Status of tasks</title>
     <%@include file="bootstrap-css.jsp" %>
 </head>
 <body>
 <div class="container">
-   <h1 align="center"><a href="/">RFC Searcher</a></h1>
-
-    <%--<div class="card">--%>
-        <%--<div class="card-body">--%>
-            <%--<h5 class="card-title">--%>
-                <%--<% if (request.getAttribute("tasks") != null) {%>--%>
-                <%--<%List<Task> taskList = (List<Task>) request.getAttribute("tasks");%>--%>
-                <%--<% for (Task tasks : taskList) { %>--%>
-                <%--<%=tasks.getId() %>--%>
-                <%--<%=tasks.getPhrase() %>--%>
-                <%--<%=tasks.getStatus() %>--%>
-            <%--</h5>--%>
-            <%--<% } %>--%>
-            <%--<% } else response.getWriter().write("No tasks");%>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-
+    <h1 align="center"><a href="/">RFC Searcher</a></h1>
 
     <table class="table table-striped">
         <thead>
@@ -46,9 +30,12 @@
         <% for (Task tasks : taskList) { %>
         <tr>
             <th scope="row">1</th>
-            <td> <%=tasks.getId() %></td>
-            <td><%=tasks.getPhrase() %></td>
-            <td><%=tasks.getStatus() %></td>
+            <td><%=tasks.getId() %>
+            </td>
+            <td><%=tasks.getPhrase() %>
+            </td>
+            <td><%=tasks.getStatus() %>
+            </td>
         </tr>
         <% } %>
         </tbody>

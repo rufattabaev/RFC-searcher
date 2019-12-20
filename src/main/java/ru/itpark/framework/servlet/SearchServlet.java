@@ -4,10 +4,7 @@ import ru.itpark.implementation.repository.FileRepositoryImpl;
 import ru.itpark.implementation.repository.TaskRepository;
 import ru.itpark.implementation.service.FileServiceImpl;
 import ru.itpark.implementation.service.TaskService;
-import ru.itpark.model.SearchByFileResult;
-import ru.itpark.model.Task;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +37,7 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String phrase = req.getParameter("phrase");
         if (phrase != null) {
-          taskService.createTask(phrase, req.getSession().getId());
+            taskService.createTask(phrase, req.getSession().getId());
 
 
         }

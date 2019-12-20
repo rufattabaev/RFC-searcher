@@ -1,7 +1,6 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="ru.itpark.model.TaskResult" %>
 <%@ page import="ru.itpark.model.SearchByFileResult" %>
+<%@ page import="ru.itpark.model.TaskResult" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -33,9 +32,6 @@
                         <label for="phrase">Search phrase</label>
                         <input type="text" id="phrase" name="phrase" class="form-control" required>
                         <button type="submit" class="btn btn-primary mt-3">Search</button>
-                        <%--<div align="right" class="row">--%>
-                        <%--<h3 align="right"><a href="/status">Show status</a></h3>--%>
-                        <%--</div>--%>
                     </div>
                 </form>
                 <form action="/status">
@@ -61,7 +57,7 @@
                     <% } %>
                     <div>
                         <a href="/?filename=<%=taskResult.getTempFileName()%>"><h3 class="btn btn-primary">
-                            Download <%-- <%=taskResult.getQuery()%>--%> </h3></a>
+                            Download </h3></a>
                     </div>
                     <% } %>
                 </div>

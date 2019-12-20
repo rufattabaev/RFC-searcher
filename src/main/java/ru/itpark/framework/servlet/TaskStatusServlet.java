@@ -20,7 +20,6 @@ public class TaskStatusServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Task> tasks = taskService.checkoutDataBase();
         req.setAttribute("tasks", tasks);
-
         req.getRequestDispatcher("/WEB-INF/result.jsp").forward(req, resp);
     }
 }

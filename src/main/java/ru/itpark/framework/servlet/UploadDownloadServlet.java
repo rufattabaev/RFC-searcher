@@ -97,9 +97,11 @@ public class UploadDownloadServlet extends HttpServlet {
             fileService.writeFile(part);
         }
 
-        if (req.getParameter("button").equals("clear")) {
-            SearchByFileResult result = new SearchByFileResult();
-            req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        if (req.getParameter("button") != null) {
+            if (req.getParameter("button").equals("clear")) {
+                SearchByFileResult result = new SearchByFileResult();
+                req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+            }
         }
         resp.sendRedirect("/");
     }
