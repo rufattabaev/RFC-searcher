@@ -5,13 +5,13 @@
             auth="container"
             type="javax.sql.DataSource"
             driverClassName="org.sqlite.JDBC"
-            url="jdbc:sqlite:D:/projects/tasksexample-developer\db.sqlite"
+            url="jdbc:sqlite:D:/projects/final-project\db.sqlite"
             closeMethod="close"
     />
 
     <Resource
             name="bean/file-service"
-            type="ru.itpark.implementation.service.FileServiceImpl"
+            type="ru.itpark.service.FileService"
             factory="org.apache.naming.factory.BeanFactory"
     />
 

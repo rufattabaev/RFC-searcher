@@ -1,10 +1,10 @@
-package ru.itpark.framework.workers;
+package ru.itpark.workers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.itpark.enums.TaskStatus;
-import ru.itpark.implementation.repository.TaskRepository;
-import ru.itpark.implementation.service.FileServiceImpl;
-import ru.itpark.implementation.service.TaskService;
+import ru.itpark.repository.TaskRepository;
+import ru.itpark.service.FileService;
+import ru.itpark.service.TaskService;
 import ru.itpark.model.Task;
 import ru.itpark.model.TaskResult;
 
@@ -15,13 +15,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TaskWorker extends Thread {
-    private FileServiceImpl fileService;
+    private FileService fileService;
     private Task task;
     private TaskService taskService = new TaskService(new TaskRepository());
 
     public TaskWorker(Task task) {
         try {
-            fileService = new FileServiceImpl();
+            fileService = new FileService();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class TaskWorker extends Thread {
         try {
             TaskResult taskResult = fileService.searchFilesByPhrase(task.getPhrase());
             ObjectMapper objectMapper = new ObjectMapper();
-            Path path = Paths.get("D:\\projects\\tasksexample-developer\\files\\" + task.getSessionId());
+            Path path = Paths.get("D:\\projects\\final-project\\files\\" + task.getSessionId());
             if (!Files.exists(path)) {
                 Files.createDirectory(path);
             }

@@ -1,10 +1,10 @@
-package ru.itpark.framework.servlet;
+package ru.itpark.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.itpark.implementation.repository.FileRepositoryImpl;
-import ru.itpark.implementation.repository.TaskRepository;
-import ru.itpark.implementation.service.FileServiceImpl;
-import ru.itpark.implementation.service.TaskService;
+import ru.itpark.repository.FileRepository;
+import ru.itpark.repository.TaskRepository;
+import ru.itpark.service.FileService;
+import ru.itpark.service.TaskService;
 import ru.itpark.model.SearchByFileResult;
 import ru.itpark.model.TaskResult;
 
@@ -28,16 +28,16 @@ import java.util.List;
 
 @MultipartConfig
 public class UploadDownloadServlet extends HttpServlet {
-    private FileServiceImpl fileService;
-    private FileRepositoryImpl fileRepository;
+    private FileService fileService;
+    private FileRepository fileRepository;
     TaskService taskService = new TaskService(new TaskRepository());
 
     @Override
     public void init() throws ServletException {
         try {
             InitialContext context = new InitialContext();
-            fileService = (FileServiceImpl) context.lookup("java:/comp/env/bean/file-service");
-            fileRepository = new FileRepositoryImpl();
+            fileService = (FileService) context.lookup("java:/comp/env/bean/file-service");
+            fileRepository = new FileRepository();
         } catch (NamingException e) {
             e.printStackTrace();
             throw new ServletException();
@@ -48,7 +48,7 @@ public class UploadDownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        Path path = Paths.get("D:\\projects\\tasksexample-developer\\files\\" + req.getSession().getId());
+        Path path = Paths.get("D:\\projects\\final-project\\files\\" + req.getSession().getId());
         if (Files.exists(path)) {
             ObjectMapper objectMapper = new ObjectMapper();
             List<TaskResult> taskResultList = new ArrayList<>();

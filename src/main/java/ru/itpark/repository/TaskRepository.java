@@ -1,4 +1,4 @@
-package ru.itpark.implementation.repository;
+package ru.itpark.repository;
 
 import ru.itpark.enums.TaskStatus;
 import ru.itpark.model.Task;

@@ -1,4 +1,4 @@
-package ru.itpark.implementation.repository;
+package ru.itpark.repository;
 
 import ru.itpark.model.SearchByFileResult;
 import ru.itpark.model.TaskResult;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileRepositoryImpl {
+public class FileRepository {
 
     public TaskResult parseAllFilesByPhrase(List<File> fileList, String phrase) throws FileNotFoundException {
 

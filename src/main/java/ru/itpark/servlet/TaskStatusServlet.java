@@ -1,7 +1,7 @@
-package ru.itpark.framework.servlet;
+package ru.itpark.servlet;
 
-import ru.itpark.implementation.repository.TaskRepository;
-import ru.itpark.implementation.service.TaskService;
+import ru.itpark.repository.TaskRepository;
+import ru.itpark.service.TaskService;
 import ru.itpark.model.Task;
 
 import javax.servlet.ServletException;

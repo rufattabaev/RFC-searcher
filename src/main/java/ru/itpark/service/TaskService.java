@@ -1,8 +1,8 @@
-package ru.itpark.implementation.service;
+package ru.itpark.service;
 
 import ru.itpark.enums.TaskStatus;
-import ru.itpark.framework.workers.TaskWorker;
-import ru.itpark.implementation.repository.TaskRepository;
+import ru.itpark.workers.TaskWorker;
+import ru.itpark.repository.TaskRepository;
 import ru.itpark.model.Task;
 
 import java.util.List;
